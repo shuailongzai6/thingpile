@@ -13,7 +13,7 @@
       <h2 class="feed-title" id="feed-title-{{ topic.pk }}">
         <a href="{% url 'topic_detail' topic.pk %}">{{ topic.title }}</a>
       </h2>
-      <p class="feed-excerpt">{{ topic.body|markdown|striptags|truncatechars:240 }}</p>
+      {% with summary=topic.body|excerpt|truncatechars:240 %}{% if summary %}<p class="feed-excerpt">{{ summary }}</p>{% endif %}{% endwith %}
       {% if topic.project %}
         <a class="feed-project" href="{% url 'project_detail' topic.project.pk %}">
           <span class="project-icon project-icon-small tone-{{ topic.project|tone }}" aria-hidden="true">{{ topic.project.name|first|upper }}</span>

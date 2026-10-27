@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Buildroom 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 02:51+0000\n"
-"PO-Revision-Date: 2026-10-27 02:51+0000\n"
+"POT-Creation-Date: 2026-10-27 03:21+0000\n"
+"PO-Revision-Date: 2026-10-27 03:21+0000\n"
 "Last-Translator: Buildroom contributors\n"
 "Language: zh_Hans\n"
 "Language-Team: Simplified Chinese\n"
@@ -254,7 +254,7 @@ msgstr "学习探索"
 msgid "Like"
 msgstr "点赞"
 
-#: templates/partials/vote.html:6
+#: templates/partials/vote.html:8
 msgid "Like project"
 msgstr "为项目点赞"
 
@@ -270,7 +270,7 @@ msgstr "登录"
 msgid "Log in to join the conversation."
 msgstr "登录后，一起聊聊。"
 
-#: templates/partials/vote.html:12
+#: templates/partials/vote.html:15
 msgid "Log in to like this project"
 msgstr "登录后为项目点赞"
 
@@ -434,10 +434,6 @@ msgstr "最近活跃"
 #: community/models.py:61
 msgid "Related project"
 msgstr "关联项目"
-
-#: templates/partials/vote.html:6
-msgid "Remove project like"
-msgstr "取消项目点赞"
 
 #: templates/community/topic_detail.html:34
 msgid "Reply"

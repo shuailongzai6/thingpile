@@ -56,7 +56,7 @@ python3 -m venv .venv
 
 ## 当前运行范围
 
-当前启动命令监听全部网卡，Django 不限制访问的 IP 和域名。正式部署需要设置 `DJANGO_DEBUG=0`、独立的 `DJANGO_SECRET_KEY`，配置 HTTPS 和静态文件服务。数据库为项目目录下的 `db.sqlite3`。
+当前启动命令监听全部网卡，Django 不限制访问的 IP 和域名。正式部署需要设置 `DJANGO_DEBUG=0`、独立的 `DJANGO_SECRET_KEY` 并配置 HTTPS。此时静态文件由 WhiteNoise 提供：文件名带哈希、可长期缓存，并预压缩为 gzip 和 brotli；启动前运行 `DJANGO_DEBUG=0 .venv/bin/python manage.py collectstatic`。数据库为项目目录下的 `db.sqlite3`。
 
 首版采用本地用户名密码认证；邮箱可选，尚未接入邮件验证、找回密码或第三方登录。项目保存外部链接，不托管代码，也不执行用户项目。
 

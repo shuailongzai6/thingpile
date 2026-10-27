@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from .models import Project, Reply, Topic
 from .queries import project_list, topic_list
-from .templatetags.community_tags import markdown
+from .templatetags.community_tags import excerpt, markdown
 
 
 class CommunityWorkflowTests(TestCase):
@@ -224,6 +224,10 @@ class CommunityWorkflowTests(TestCase):
             reverse("markdown_preview", args=["body"]), {"body": "**Hi**"}
         )
         self.assertContains(response, "<strong>Hi</strong>")
+        self.assertEqual(
+            excerpt('**Hello**\n\n```python\nprint("hello")\n```'), "Hello"
+        )
+        self.assertIn('loading="lazy"', markdown("![shot](https://example.com/a.png)"))
 
     def test_language_switch_is_persistent_and_does_not_translate_user_content(self):
         response = self.client.post(
