@@ -1,9 +1,18 @@
-{% load i18n %}
+{% load i18n static %}
 {% if user.is_authenticated %}
   <form class="like-control" method="post" action="{% url 'topic_like' topic.pk %}" hx-post="{% url 'topic_like' topic.pk %}" hx-target="this" hx-swap="outerHTML">
-    {% csrf_token %}<input type="hidden" name="next" value="{% firstof page_url request.POST.next request.get_full_path %}">
-    <button class="like-button{% if topic.has_liked %} is-selected{% endif %}" type="submit" aria-pressed="{{ topic.has_liked|yesno:'true,false' }}"><span aria-hidden="true">♡</span>{% if topic.has_liked %}{% translate 'Liked' %}{% else %}{% translate 'Like' %}{% endif %}<span>{{ topic.like_count|default:0 }}</span></button>
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% firstof page_url request.POST.next request.get_full_path %}">
+    <button class="like-button" type="submit" aria-pressed="{{ topic.has_liked|yesno:'true,false' }}">
+      <svg class="icon icon-small" aria-hidden="true"><use href="{% static 'img/icons.svg' %}#heart"></use></svg>
+      {% if topic.has_liked %}{% translate 'Liked' %}{% else %}{% translate 'Like' %}{% endif %}
+      <span>{{ topic.like_count|default:0 }}</span>
+    </button>
   </form>
 {% else %}
-  <a class="like-button" href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}"><span aria-hidden="true">♡</span>{% translate 'Like' %}<span>{{ topic.like_count|default:0 }}</span></a>
+  <a class="like-button" href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">
+    <svg class="icon icon-small" aria-hidden="true"><use href="{% static 'img/icons.svg' %}#heart"></use></svg>
+    {% translate 'Like' %}
+    <span>{{ topic.like_count|default:0 }}</span>
+  </a>
 {% endif %}

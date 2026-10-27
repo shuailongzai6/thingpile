@@ -1,13 +1,13 @@
-{% load i18n humanize community_tags %}
+{% load i18n static community_tags %}
 
 <div class="topic-feed">
   {% for topic in topics %}
     <article class="feed-card" aria-labelledby="feed-title-{{ topic.pk }}">
       <div class="feed-byline">
-        <span class="author-avatar avatar-small feed-avatar" aria-hidden="true">{{ topic.author.get_full_name|default:topic.author.username|first|upper }}</span>
+        {% include 'partials/avatar.html' with person=topic.author small=True %}
         <span class="feed-author">{{ topic.author.get_full_name|default:topic.author.username }}</span>
         <span class="meta-separator" aria-hidden="true">·</span>
-        <time class="feed-time" datetime="{{ topic.created_at|date:'c' }}" title="{{ topic.created_at|date:'DATETIME_FORMAT' }}">{% blocktranslate with time=topic.created_at|timesince %}{{ time }} ago{% endblocktranslate %}</time>
+        <time datetime="{{ topic.created_at|date:'c' }}" title="{{ topic.created_at|date:'DATETIME_FORMAT' }}">{% blocktranslate with time=topic.created_at|timesince %}{{ time }} ago{% endblocktranslate %}</time>
         <a class="feed-category" href="{% url 'forum' %}?category={{ topic.category }}">{{ topic.get_category_display }}</a>
       </div>
       <h2 class="feed-title" id="feed-title-{{ topic.pk }}">
@@ -16,7 +16,7 @@
       <p class="feed-excerpt">{{ topic.body|markdown|striptags|truncatechars:240 }}</p>
       {% if topic.project %}
         <a class="feed-project" href="{% url 'project_detail' topic.project.pk %}">
-          <span class="feed-project-icon" aria-hidden="true">{{ topic.project.name|first|upper }}</span>
+          <span class="project-icon project-icon-small tone-{{ topic.project|tone }}" aria-hidden="true">{{ topic.project.name|first|upper }}</span>
           <span class="feed-project-copy">
             <strong>{{ topic.project.name }}</strong>
             <span>{{ topic.project.tagline }}</span>
@@ -27,14 +27,14 @@
       <div class="feed-actions">
         {% include 'partials/like.html' %}
         <a class="feed-comment-link" href="{% url 'topic_detail' topic.pk %}#replies">
-          <svg class="icon icon-small" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 3.5h14v10H9l-4 3v-3H3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          <svg class="icon icon-small" aria-hidden="true"><use href="{% static 'img/icons.svg' %}#comment"></use></svg>
           <span>{% blocktranslate count count=topic.reply_count %}{{ count }} reply{% plural %}{{ count }} replies{% endblocktranslate %}</span>
         </a>
         <a class="feed-read-link" href="{% url 'topic_detail' topic.pk %}">{% translate 'Read full discussion' %}<span aria-hidden="true"> →</span></a>
       </div>
     </article>
   {% empty %}
-    <div class="empty-state surface-panel">
+    <div class="empty-state panel">
       <span class="empty-state-icon" aria-hidden="true">↗</span>
       <h2>{% translate 'A little quiet here.' %}</h2>
       <p>{% translate 'Try a different search, or start a conversation of your own.' %}</p>

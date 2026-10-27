@@ -1,8 +1,23 @@
 {% extends 'base.html' %}
 {% load i18n %}
+
 {% block title %}{% translate 'Log in' %} · Buildroom{% endblock %}
 {% block shell_class %}page-shell-single{% endblock %}
 {% block sidebar %}{% endblock %}
+
 {% block content %}
-  <section class="auth-card surface-panel"><header class="form-heading"><p class="page-eyebrow">{% translate 'Your seat is still here' %}</p><h1 class="page-title">{% translate 'Welcome back.' %}</h1><p class="page-description">{% translate 'Pick up the conversation where you left off.' %}</p></header><form class="content-form" method="post" action="{% url 'login' %}">{% csrf_token %}<input type="hidden" name="next" value="{{ next }}">{% include 'partials/fields.html' %}<div class="form-actions"><button class="button button-primary button-full" type="submit">{% translate 'Log in' %}<span aria-hidden="true">↗</span></button></div></form><p class="auth-alternative">{% translate 'New around here?' %} <a href="{% url 'signup' %}{% if next %}?next={{ next|urlencode }}{% endif %}">{% translate 'Create an account' %}</a></p></section>
+  <section class="panel auth-card">
+    <header class="form-heading">
+      <p class="page-eyebrow">{% translate 'Your seat is still here' %}</p>
+      <h1 class="page-title">{% translate 'Welcome back.' %}</h1>
+      <p class="page-description">{% translate 'Pick up the conversation where you left off.' %}</p>
+    </header>
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      {% include 'partials/fields.html' %}
+      <div class="form-actions"><button class="button button-primary button-full" type="submit">{% translate 'Log in' %}<span aria-hidden="true">↗</span></button></div>
+    </form>
+    <p class="auth-alternative">{% translate 'New around here?' %} <a href="{% url 'signup' %}{% if next %}?next={{ next|urlencode }}{% endif %}">{% translate 'Create an account' %}</a></p>
+  </section>
 {% endblock %}

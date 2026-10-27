@@ -1,0 +1,2 @@
+{% load i18n community_tags %}
+{% if text.strip %}{{ text|markdown }}{% else %}<p class="preview-empty">{% translate 'Nothing to preview' %}</p>{% endif %}

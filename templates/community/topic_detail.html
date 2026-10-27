@@ -1,35 +1,35 @@
 {% extends 'community/forum_base.html' %}
-{% load i18n humanize community_tags %}
+{% load i18n community_tags %}
 
 {% block title %}{{ topic.title }} · Buildroom{% endblock %}
 
 {% block content %}
   <a class="back-link" href="{% url 'forum' %}"><span aria-hidden="true">←</span> {% translate 'Back to forum' %}</a>
-  <article class="surface-panel topic-detail reader-topic">
-    <header class="topic-detail-header reader-header">
+  <article class="panel topic-detail">
+    <header class="topic-detail-header">
       <div class="topic-detail-labels">
-        <a class="badge badge-category" href="{% url 'forum' %}?category={{ topic.category }}">{{ topic.get_category_display }}</a>
+        <a class="badge" href="{% url 'forum' %}?category={{ topic.category }}">{{ topic.get_category_display }}</a>
         {% if topic.project %}
           <a class="badge badge-project" href="{% url 'project_detail' topic.project.pk %}"><span aria-hidden="true">↗</span> {{ topic.project.name }}</a>
         {% endif %}
       </div>
       <h1 class="detail-title">{{ topic.title }}</h1>
-      <div class="topic-meta reader-byline">
-        <span class="author-avatar avatar-small" aria-hidden="true">{{ topic.author.get_full_name|default:topic.author.username|first|upper }}</span>
+      <div class="topic-meta">
+        {% include 'partials/avatar.html' with person=topic.author small=True %}
         <strong>{{ topic.author.get_full_name|default:topic.author.username }}</strong>
         <span class="meta-separator" aria-hidden="true">·</span>
         <time datetime="{{ topic.created_at|date:'c' }}">{{ topic.created_at|date:'DATETIME_FORMAT' }}</time>
       </div>
     </header>
-    <div class="topic-body markdown-content reader-body">{{ topic.body|markdown }}</div>
+    <div class="topic-body markdown-content">{{ topic.body|markdown }}</div>
     {% if topic.project %}
-      <a class="feed-project reader-project" href="{% url 'project_detail' topic.project.pk %}">
-        <span class="feed-project-icon" aria-hidden="true">{{ topic.project.name|first|upper }}</span>
+      <a class="feed-project topic-project" href="{% url 'project_detail' topic.project.pk %}">
+        <span class="project-icon project-icon-small tone-{{ topic.project|tone }}" aria-hidden="true">{{ topic.project.name|first|upper }}</span>
         <span class="feed-project-copy"><strong>{{ topic.project.name }}</strong><span>{{ topic.project.tagline }}</span></span>
         <span aria-hidden="true">↗</span>
       </a>
     {% endif %}
-    <div class="topic-actions reader-actions">
+    <div class="topic-actions">
       {% include 'partials/like.html' %}
       <a class="button button-quiet button-small" href="#reply-form">{% translate 'Reply' %}<span>{{ topic.reply_count|default:0 }}</span></a>
       {% if user == topic.author %}
@@ -38,8 +38,8 @@
     </div>
   </article>
 
-  <section class="surface-panel discussion-section reader-conversation" id="replies">
-    <div class="section-heading discussion-heading">
+  <section class="panel discussion-section" id="replies">
+    <div class="discussion-heading">
       <h2 class="section-title">{% translate 'Conversation' %}<span class="count-badge">{{ replies|length }}</span></h2>
     </div>
     {% include 'partials/replies.html' %}

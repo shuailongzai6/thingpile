@@ -132,6 +132,7 @@ def project_detail(request, pk):
             "topics": page,
             "page_obj": page,
             "topic_count": page.paginator.count,
+            "categories": category_counts(Project),
         },
     )
 
@@ -299,6 +300,13 @@ def topic_like(request, pk):
             {"topic": topic_list(request.user).get(pk=pk)},
         )
     return redirect(return_to(request, topic.get_absolute_url()))
+
+
+@require_POST
+def markdown_preview(request, field):
+    return render(
+        request, "partials/preview.html", {"text": request.POST.get(field, "")}
+    )
 
 
 def signup(request):

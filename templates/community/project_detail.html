@@ -1,19 +1,54 @@
-{% extends 'base.html' %}
-{% load i18n humanize community_tags %}
+{% extends 'community/projects_base.html' %}
+{% load i18n community_tags %}
+
 {% block title %}{{ project.name }} · Buildroom{% endblock %}
+
 {% block content %}
   <a class="back-link" href="{% url 'projects' %}"><span aria-hidden="true">←</span> {% translate 'All projects' %}</a>
-  <article class="surface-panel project-detail">
+  <article class="panel project-detail">
     <header class="project-header">
-      <div class="project-heading"><span class="project-icon project-icon-large" aria-hidden="true">{{ project.name|first|upper }}</span><div><span class="badge badge-category">{{ project.get_category_display }}</span><h1 class="detail-title">{{ project.name }}</h1><p class="project-tagline">{{ project.tagline }}</p></div>{% include 'partials/vote.html' %}</div>
-      <div class="project-meta"><span class="author-avatar avatar-small" aria-hidden="true">{{ project.owner.get_full_name|default:project.owner.username|first|upper }}</span><span>{% blocktranslate with username=project.owner.get_full_name|default:project.owner.username %}Built by {{ username }}{% endblocktranslate %}</span><span class="meta-separator" aria-hidden="true">·</span><time datetime="{{ project.created_at|date:'c' }}">{{ project.created_at|date:'DATE_FORMAT' }}</time></div>
-      <div class="project-actions">{% if project.demo_url %}<a class="button button-primary" href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer">{% translate 'Visit project' %}<span aria-hidden="true">↗</span></a>{% endif %}{% if project.repository_url %}<a class="button button-secondary" href="{{ project.repository_url }}" target="_blank" rel="noopener noreferrer">{% translate 'Source code' %}<span aria-hidden="true">↗</span></a>{% endif %}<a class="button button-quiet" href="#discussions">{% translate 'Join the discussion' %}<span aria-hidden="true">↓</span></a>{% if user == project.owner %}<a class="button button-quiet button-small" href="{% url 'project_edit' project.pk %}">{% translate 'Edit project' %}</a>{% endif %}</div>
+      <div class="project-heading">
+        <span class="project-icon project-icon-large tone-{{ project|tone }}" aria-hidden="true">{{ project.name|first|upper }}</span>
+        <div>
+          <a class="badge" href="{% url 'projects' %}?category={{ project.category }}">{{ project.get_category_display }}</a>
+          <h1 class="detail-title">{{ project.name }}</h1>
+          <p class="project-tagline">{{ project.tagline }}</p>
+        </div>
+        {% include 'partials/vote.html' %}
+      </div>
+      <div class="project-meta">
+        {% include 'partials/avatar.html' with person=project.owner small=True %}
+        <span>{% blocktranslate with username=project.owner.get_full_name|default:project.owner.username %}Built by {{ username }}{% endblocktranslate %}</span>
+        <span class="meta-separator" aria-hidden="true">·</span>
+        <time datetime="{{ project.created_at|date:'c' }}">{{ project.created_at|date:'DATE_FORMAT' }}</time>
+      </div>
+      <div class="project-actions">
+        {% if project.demo_url %}<a class="button button-primary" href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer">{% translate 'Visit project' %}<span aria-hidden="true">↗</span></a>{% endif %}
+        {% if project.repository_url %}<a class="button button-secondary" href="{{ project.repository_url }}" target="_blank" rel="noopener noreferrer">{% translate 'Source code' %}<span aria-hidden="true">↗</span></a>{% endif %}
+        <a class="button button-quiet" href="#discussions">{% translate 'Join the discussion' %}<span aria-hidden="true">↓</span></a>
+        {% if user == project.owner %}<a class="button button-quiet button-small" href="{% url 'project_edit' project.pk %}">{% translate 'Edit project' %}</a>{% endif %}
+      </div>
     </header>
-    <div class="project-description"><h2 class="section-title">{% translate 'About this project' %}</h2><div class="markdown-content">{{ project.description|markdown }}</div></div>
-    {% if project.tool_list %}<div class="project-tools"><h2 class="section-title">{% translate 'Built with' %}</h2><div class="tool-list">{% for tool in project.tool_list %}<span class="tool-tag">{{ tool }}</span>{% endfor %}</div></div>{% endif %}
+    <div class="project-description">
+      <h2 class="section-title">{% translate 'About this project' %}</h2>
+      <div class="markdown-content">{{ project.description|markdown }}</div>
+    </div>
+    {% if project.tool_list %}
+      <div class="project-tools">
+        <h2 class="section-title">{% translate 'Built with' %}</h2>
+        <div class="tool-list">{% for tool in project.tool_list %}<span class="tool-tag">{{ tool }}</span>{% endfor %}</div>
+      </div>
+    {% endif %}
   </article>
-  <section id="discussions" class="discussion-section surface-panel">
-    <div class="section-heading discussion-heading"><div><h2 class="section-title">{% translate 'Project discussions' %}<span class="count-badge">{{ topic_count }}</span></h2><p class="section-description">{% translate 'Questions, feedback, and what comes next.' %}</p></div><a class="button button-primary button-small" href="{% url 'topic_create' %}?project={{ project.pk }}"><span aria-hidden="true">+</span>{% translate 'New discussion' %}</a></div>
+
+  <section id="discussions" class="panel discussion-section">
+    <div class="discussion-heading">
+      <div>
+        <h2 class="section-title">{% translate 'Project discussions' %}<span class="count-badge">{{ topic_count }}</span></h2>
+        <p class="section-description">{% translate 'Questions, feedback, and what comes next.' %}</p>
+      </div>
+      <a class="button button-primary button-small" href="{% url 'topic_create' %}?project={{ project.pk }}"><span aria-hidden="true">+</span>{% translate 'New discussion' %}</a>
+    </div>
     {% include 'partials/topic_list.html' %}
     {% include 'partials/pagination.html' %}
   </section>

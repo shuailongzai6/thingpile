@@ -1,0 +1,1 @@
+{% load community_tags %}<span class="avatar{% if small %} avatar-small{% endif %} tone-{{ person|tone }}" aria-hidden="true">{{ person.get_full_name|default:person.username|first|upper }}</span>

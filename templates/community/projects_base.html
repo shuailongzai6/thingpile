@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block left_sidebar %}
+  {% url 'projects' as url %}
+  {% translate 'Project navigation' as label %}
+  {% translate 'All projects' as all_label %}
+  {% firstof category project.category as active %}
+  {% include 'partials/section_nav.html' with icon='projects' total=community_stats.projects %}
+{% endblock %}

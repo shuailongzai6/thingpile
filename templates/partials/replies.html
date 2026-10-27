@@ -1,5 +1,18 @@
-{% load i18n humanize community_tags %}
+{% load i18n community_tags %}
 <div class="reply-list">
-  {% for reply in replies %}<article class="reply" id="reply-{{ reply.pk }}"><span class="author-avatar" aria-hidden="true">{{ reply.author.get_full_name|default:reply.author.username|first|upper }}</span><div class="reply-content"><header class="reply-header"><strong>{{ reply.author.get_full_name|default:reply.author.username }}</strong>{% if reply.author == topic.author %}<span class="badge badge-author">{% translate 'Author' %}</span>{% endif %}<a class="reply-time" href="#reply-{{ reply.pk }}"><time datetime="{{ reply.created_at|date:'c' }}" title="{{ reply.created_at|date:'DATETIME_FORMAT' }}">{% blocktranslate with time=reply.created_at|timesince %}{{ time }} ago{% endblocktranslate %}</time></a></header><div class="reply-body markdown-content">{{ reply.body|markdown }}</div></div></article>
-  {% empty %}<div class="empty-state empty-state-small"><p>{% translate 'No replies yet. Be the first to join in.' %}</p></div>{% endfor %}
+  {% for reply in replies %}
+    <article class="reply" id="reply-{{ reply.pk }}">
+      {% include 'partials/avatar.html' with person=reply.author %}
+      <div class="reply-content">
+        <header class="reply-header">
+          <strong>{{ reply.author.get_full_name|default:reply.author.username }}</strong>
+          {% if reply.author == topic.author %}<span class="badge badge-author">{% translate 'Author' %}</span>{% endif %}
+          <a class="reply-time" href="#reply-{{ reply.pk }}"><time datetime="{{ reply.created_at|date:'c' }}" title="{{ reply.created_at|date:'DATETIME_FORMAT' }}">{% blocktranslate with time=reply.created_at|timesince %}{{ time }} ago{% endblocktranslate %}</time></a>
+        </header>
+        <div class="reply-body markdown-content">{{ reply.body|markdown }}</div>
+      </div>
+    </article>
+  {% empty %}
+    <div class="empty-state empty-state-small"><p>{% translate 'No replies yet. Be the first to join in.' %}</p></div>
+  {% endfor %}
 </div>

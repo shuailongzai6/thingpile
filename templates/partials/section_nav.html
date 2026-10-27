@@ -1,0 +1,16 @@
+{% load i18n static %}
+<nav class="section-nav" aria-label="{{ label }}">
+  <a class="section-nav-link" href="{{ url }}"{% if not active %} aria-current="page"{% endif %}>
+    <svg class="icon" aria-hidden="true"><use href="{% static 'img/icons.svg' %}#{{ icon }}"></use></svg>
+    <span>{{ all_label }}</span>
+    <span class="section-nav-count">{{ total }}</span>
+  </a>
+  <h2 class="section-nav-heading">{% translate 'Categories' %}</h2>
+  {% for item in categories %}
+    <a class="section-nav-link" href="{{ url }}{% querystring category=item.value page=None %}"{% if item.value == active %} aria-current="page"{% endif %}>
+      <svg class="icon" aria-hidden="true"><use href="{% static 'img/icons.svg' %}#{{ item.value }}"></use></svg>
+      <span>{{ item.label }}</span>
+      <span class="section-nav-count">{{ item.count }}</span>
+    </a>
+  {% endfor %}
+</nav>

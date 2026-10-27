@@ -5,6 +5,12 @@
   {% for field in form.visible_fields %}
     <div class="form-field{% if field.errors %} has-error{% endif %}">
       <label class="field-label" for="{{ field.id_for_label }}">{{ field.label }}{% if not field.field.required %}<span class="field-optional">{% translate 'optional' %}</span>{% endif %}</label>
+      {% if field.widget_type == 'textarea' %}
+        <details class="editor-preview" hx-post="{% url 'markdown_preview' field.html_name %}" hx-trigger="toggle[this.open]" hx-target="find .markdown-content">
+          <summary><span>{% translate 'Preview' %}</span><span>{% translate 'Write' %}</span></summary>
+          <div class="markdown-content"></div>
+        </details>
+      {% endif %}
       {{ field }}
       {% if field.help_text %}<div class="field-help"{% if field.auto_id %} id="{{ field.auto_id }}_helptext"{% endif %}>{{ field.help_text|safe }}</div>{% endif %}
       {% if field.errors %}<div class="field-errors" role="alert">{{ field.errors }}</div>{% endif %}

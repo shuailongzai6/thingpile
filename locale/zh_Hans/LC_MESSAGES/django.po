@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Buildroom 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 14:53+0900\n"
-"PO-Revision-Date: 2026-10-22 18:35+0900\n"
+"POT-Creation-Date: 2026-10-27 02:51+0000\n"
+"PO-Revision-Date: 2026-10-27 02:51+0000\n"
 "Last-Translator: Buildroom contributors\n"
 "Language: zh_Hans\n"
 "Language-Team: Simplified Chinese\n"
@@ -13,33 +13,33 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.18.0\n"
 
-#: templates/partials/project_list.html:9
+#: templates/partials/project_list.html:13
 #, python-format
 msgid "%(count)s discussion"
 msgid_plural "%(count)s discussions"
 msgstr[0] "%(count)s 个讨论"
 
-#: templates/community/projects.html:22
+#: templates/community/projects.html:9
 #, python-format
 msgid "%(count)s project"
 msgid_plural "%(count)s projects"
 msgstr[0] "%(count)s 个项目"
 
-#: templates/partials/topic_list.html:10
+#: templates/partials/topic_feed.html:31 templates/partials/topic_list.html:16
 #, python-format
 msgid "%(count)s reply"
 msgid_plural "%(count)s replies"
 msgstr[0] "%(count)s 条回复"
 
-#: templates/community/forum.html:29
+#: templates/community/forum.html:9
 #, python-format
 msgid "%(count)s topic"
 msgid_plural "%(count)s topics"
 msgstr[0] "%(count)s 个话题"
 
-#: templates/partials/replies.html:3 templates/partials/topic_list.html:8
+#: templates/partials/replies.html:10 templates/partials/topic_feed.html:10 templates/partials/topic_list.html:11
 #, python-format
 msgid "%(time)s ago"
 msgstr "%(time)s前"
@@ -48,125 +48,120 @@ msgstr "%(time)s前"
 msgid "A community for sharing projects, asking questions, and building with AI."
 msgstr "分享项目、交流问题，一起用 AI 把想法做出来。"
 
-#: templates/base.html:79
+#: templates/base.html:103
 msgid "A little more building. A little more conversation."
 msgstr "多做一点，也多聊一点。"
 
-#: templates/partials/topic_list.html:13
+#: templates/partials/topic_feed.html:39 templates/partials/topic_list.html:23
 msgid "A little quiet here."
 msgstr "这里还很安静。"
 
-#: templates/base.html:54
+#: templates/base.html:73
 msgid "A place for builders"
 msgstr "创作者的交流空间"
 
-#: community/views.py:150
+#: community/views.py:227
 msgid "A question, a small win, or something worth talking about."
 msgstr "一个问题、一点进展，或任何值得聊聊的事。"
 
-#: community/models.py:20
+#: community/models.py:22
 msgid "AI tools used"
 msgstr "使用的 AI 工具"
 
-#: templates/community/project_detail.html:12
+#: templates/community/project_detail.html:33
 msgid "About this project"
 msgstr "项目介绍"
 
-#: community/models.py:18
+#: community/models.py:20
 msgid "About your project"
 msgstr "项目介绍"
 
-#: community/forms.py:51
+#: community/forms.py:77
 msgid "Add to the conversation…"
 msgstr "说说你的想法…"
 
-#: templates/community/topic_detail.html:15
+#: templates/community/topic_detail.html:48
 msgid "Add your reply"
 msgstr "发表回复"
 
-#: templates/community/forum.html:16 templates/community/projects.html:15
-msgid "All categories"
-msgstr "全部分类"
-
-#: templates/community/forum_base.html:35
+#: templates/community/forum_base.html:7
 msgid "All discussions"
 msgstr "全部讨论"
 
-#: templates/community/forum.html:18 templates/community/project_detail.html:5
+#: templates/community/forum.html:48 templates/community/project_detail.html:7 templates/community/projects_base.html:7
 msgid "All projects"
 msgstr "全部项目"
 
-#: templates/registration/signup.html:7
+#: templates/registration/signup.html:21
 msgid "Already part of the community?"
 msgstr "已经有账号了？"
 
-#: templates/base.html:34
+#: templates/base.html:52 templates/community/forum.html:53
 msgid "Apply"
 msgstr "应用"
 
-#: templates/base.html:60
+#: templates/base.html:79
 msgid "Around the community"
 msgstr "社区一览"
 
-#: templates/partials/replies.html:3
+#: templates/partials/replies.html:9
 msgid "Author"
 msgstr "楼主"
 
-#: templates/community/topic_detail.html:5
+#: templates/community/topic_detail.html:7
 msgid "Back to forum"
 msgstr "返回论坛"
 
-#: templates/community/topic_detail.html:15
+#: templates/community/topic_detail.html:54
 msgid "Be thoughtful. Be helpful. Be yourself."
 msgstr "认真交流，互相帮助，自在表达。"
 
-#: community/models.py:46
+#: community/models.py:50
 msgid "Build logs"
 msgstr "开发日志"
 
-#: templates/base.html:18
+#: templates/base.html:19
 msgid "Buildroom home"
 msgstr "Buildroom 首页"
 
-#: templates/community/project_detail.html:9
+#: templates/community/project_detail.html:21
 #, python-format
 msgid "Built by %(username)s"
 msgstr "由 %(username)s 创作"
 
-#: templates/community/project_detail.html:13
+#: templates/community/project_detail.html:38
 msgid "Built with"
 msgstr "使用的工具"
 
-#: templates/community/form.html:7
+#: templates/community/form.html:20
 msgid "Cancel"
 msgstr "取消"
 
-#: templates/community/forum_base.html:38
+#: templates/partials/section_nav.html:8
 msgid "Categories"
 msgstr "分类"
 
-#: community/models.py:19 community/models.py:52 templates/community/forum.html:15
-#: templates/community/projects.html:14
+#: community/models.py:21 community/models.py:66
 msgid "Category"
 msgstr "分类"
 
-#: templates/community/forum.html:9
+#: templates/community/forum.html:32 templates/community/projects.html:28
 msgid "Clear filter"
 msgstr "清除筛选"
 
-#: templates/base.html:52
+#: templates/base.html:71
 msgid "Community"
 msgstr "社区"
 
-#: templates/community/topic_detail.html:12
+#: templates/community/topic_detail.html:43
 msgid "Conversation"
 msgstr "讨论"
 
-#: templates/registration/signup.html:7
+#: templates/registration/signup.html:19
 msgid "Create account"
 msgstr "注册账号"
 
-#: templates/registration/login.html:7 templates/registration/signup.html:3
+#: templates/registration/login.html:21 templates/registration/signup.html:4
 msgid "Create an account"
 msgstr "注册账号"
 
@@ -174,7 +169,7 @@ msgstr "注册账号"
 msgid "Creative"
 msgstr "创意作品"
 
-#: community/forms.py:26
+#: community/forms.py:41
 msgid "Describe the idea, how you built it, and what you learned. Markdown supported."
 msgstr "介绍项目的想法、开发过程和收获。支持 Markdown。"
 
@@ -182,88 +177,72 @@ msgstr "介绍项目的想法、开发过程和收获。支持 Markdown。"
 msgid "Developer tools"
 msgstr "开发工具"
 
-#: templates/community/projects.html:6
-msgid "Discover what people are making, try it out, and talk to the builders."
-msgstr "看看大家在做什么，动手体验，再和作者聊聊。"
-
-#: community/views.py:162
+#: community/views.py:242
 msgid "Discussion updated."
 msgstr "讨论已更新。"
 
-#: templates/community/forum_base.html:30
-msgid "Discussions"
-msgstr "讨论"
-
-#: templates/community/forum.html:9
+#: templates/community/forum.html:30
 #, python-format
 msgid "Discussions about %(name)s"
 msgstr "关于 %(name)s 的讨论"
 
-#: community/views.py:165
+#: community/views.py:249
 msgid "Edit discussion"
 msgstr "编辑讨论"
 
-#: community/views.py:129 templates/community/project_detail.html:10
+#: community/views.py:199 templates/community/project_detail.html:29
 msgid "Edit project"
 msgstr "编辑项目"
 
-#: templates/community/topic_detail.html:9
+#: templates/community/topic_detail.html:36
 msgid "Edit topic"
 msgstr "编辑话题"
 
-#: templates/community/forum_base.html:60
-msgid "Explore"
-msgstr "发现"
-
-#: templates/base.html:23 templates/community/forum.html:3
+#: templates/base.html:24 templates/community/forum.html:4 templates/community/forum.html:8
 msgid "Forum"
 msgstr "论坛"
 
-#: templates/community/forum_base.html:29
+#: templates/community/forum_base.html:6
 msgid "Forum navigation"
 msgstr "论坛导航"
 
-#: templates/base.html:69
+#: templates/base.html:88
 msgid "Fresh projects"
 msgstr "新鲜项目"
 
-#: community/models.py:43
+#: community/models.py:47
 msgid "General"
 msgstr "闲聊"
 
-#: community/views.py:115
+#: community/views.py:177
 msgid "Give your work a home in the community."
 msgstr "让你的作品在社区里有个家。"
 
-#: templates/community/form.html:7
+#: templates/community/form.html:10
 msgid "Go back"
 msgstr "返回"
 
-#: templates/community/forum.html:6
-msgid "Good things start with a conversation."
-msgstr "好想法，从聊一聊开始。"
-
-#: templates/community/topic_detail.html:16
+#: templates/community/topic_detail.html:60
 msgid "Have something to add?"
 msgstr "也想说点什么？"
 
-#: community/models.py:45
+#: community/models.py:49
 msgid "Help"
 msgstr "求助"
 
-#: templates/base.html:41
+#: templates/base.html:59
 msgid "Join the community"
 msgstr "加入社区"
 
-#: templates/community/project_detail.html:10
+#: templates/community/project_detail.html:28
 msgid "Join the discussion"
 msgstr "参与讨论"
 
-#: templates/base.html:30
+#: templates/base.html:48
 msgid "Language"
 msgstr "语言"
 
-#: templates/community/forum.html:26 templates/community/projects.html:21
+#: templates/community/forum.html:39 templates/community/projects.html:34
 msgid "Latest"
 msgstr "最新发布"
 
@@ -271,108 +250,107 @@ msgstr "最新发布"
 msgid "Learning"
 msgstr "学习探索"
 
-#: templates/partials/like.html:5 templates/partials/like.html:8
+#: templates/partials/like.html:8 templates/partials/like.html:15
 msgid "Like"
 msgstr "点赞"
 
-#: templates/partials/vote.html:5
+#: templates/partials/vote.html:6
 msgid "Like project"
 msgstr "为项目点赞"
 
-#: templates/partials/like.html:5
+#: templates/partials/like.html:8
 msgid "Liked"
 msgstr "已点赞"
 
-#: templates/base.html:40 templates/registration/login.html:3 templates/registration/login.html:7
-#: templates/registration/signup.html:7
+#: templates/base.html:58 templates/registration/login.html:4 templates/registration/login.html:19 templates/registration/signup.html:21
 msgid "Log in"
 msgstr "登录"
 
-#: templates/community/topic_detail.html:16
+#: templates/community/topic_detail.html:61
 msgid "Log in to join the conversation."
 msgstr "登录后，一起聊聊。"
 
-#: templates/partials/vote.html:8
+#: templates/partials/vote.html:12
 msgid "Log in to like this project"
 msgstr "登录后为项目点赞"
 
-#: templates/community/topic_detail.html:16
+#: templates/community/topic_detail.html:62
 msgid "Log in to reply"
 msgstr "登录后回复"
 
-#: templates/base.html:38
+#: templates/base.html:56
 msgid "Log out"
 msgstr "退出登录"
 
-#: templates/community/projects.html:6
-msgid "Made with a little help from AI"
-msgstr "借助 AI，把想法做出来"
-
-#: templates/base.html:22
+#: templates/base.html:23
 msgid "Main navigation"
 msgstr "主导航"
 
-#: templates/base.html:55
+#: templates/base.html:74
 msgid "Make something. Talk about it."
 msgstr "做点东西，一起聊聊。"
 
-#: templates/registration/signup.html:7
+#: templates/registration/signup.html:12
 msgid "Make yourself at home."
 msgstr "在这里，自在一点。"
 
-#: community/forms.py:43
+#: community/forms.py:66
 msgid "Markdown supported. Share context, ask a question, or tell your story."
 msgstr "支持 Markdown。介绍背景、提出问题，或分享你的故事。"
 
-#: templates/base.html:64
+#: templates/base.html:83
 msgid "Members"
 msgstr "成员"
 
-#: templates/community/forum.html:27 templates/community/projects.html:21
+#: templates/community/forum.html:40 templates/community/projects.html:35
 msgid "Most liked"
 msgstr "最多点赞"
 
-#: templates/registration/login.html:7
+#: templates/registration/login.html:21
 msgid "New around here?"
 msgstr "第一次来？"
 
-#: templates/community/project_detail.html:16
+#: templates/community/project_detail.html:50
 msgid "New discussion"
 msgstr "发起讨论"
 
-#: templates/community/forum.html:7
+#: templates/community/forum.html:19
 msgid "New topic"
 msgstr "发布话题"
 
-#: templates/partials/pagination.html:6
+#: templates/partials/pagination.html:11 templates/partials/pagination.html:13
 msgid "Next"
 msgstr "下一页"
 
-#: templates/partials/project_list.html:14
+#: templates/partials/project_list.html:22
 msgid "No projects match this search. Try another search or share what you are building."
 msgstr "没有找到相关项目。换个关键词试试，或分享你正在做的项目。"
 
-#: templates/partials/replies.html:4
+#: templates/partials/replies.html:16
 msgid "No replies yet. Be the first to join in."
 msgstr "还没有回复，来聊第一句吧。"
 
-#: community/models.py:17
+#: templates/partials/preview.html:2
+msgid "Nothing to preview"
+msgstr "没有可预览的内容"
+
+#: community/models.py:19
 msgid "One-line description"
 msgstr "一句话介绍"
 
-#: community/forms.py:29
+#: community/forms.py:47
 msgid "Optional. Add a live website or demo people can try."
 msgstr "选填。提供可访问的网站或演示，方便大家体验。"
 
-#: community/forms.py:28
+#: community/forms.py:45
 msgid "Optional. Link to your repository on GitHub, GitLab, or another host."
 msgstr "选填。填写 GitHub、GitLab 等平台上的代码仓库链接。"
 
-#: community/forms.py:42
+#: community/forms.py:63
 msgid "Optional. This post will also appear in the project's discussion area."
 msgstr "选填。关联后，这篇帖子也会出现在项目讨论区。"
 
-#: templates/partials/pagination.html:5
+#: templates/partials/pagination.html:9
 #, python-format
 msgid "Page %(current)s of %(total)s"
 msgstr "第 %(current)s 页，共 %(total)s 页"
@@ -381,15 +359,19 @@ msgstr "第 %(current)s 页，共 %(total)s 页"
 msgid "Pagination"
 msgstr "分页导航"
 
-#: templates/registration/login.html:7
+#: templates/registration/login.html:13
 msgid "Pick up the conversation where you left off."
 msgstr "接着上次的话题，继续聊吧。"
 
-#: templates/community/topic_detail.html:15
+#: templates/community/topic_detail.html:55
 msgid "Post reply"
 msgstr "发表回复"
 
-#: templates/partials/pagination.html:4
+#: templates/partials/fields.html:10
+msgid "Preview"
+msgstr "预览"
+
+#: templates/partials/pagination.html:5 templates/partials/pagination.html:7
 msgid "Previous"
 msgstr "上一页"
 
@@ -397,47 +379,47 @@ msgstr "上一页"
 msgid "Productivity"
 msgstr "效率工具"
 
-#: templates/community/forum.html:17
+#: templates/community/forum.html:46
 msgid "Project"
 msgstr "项目"
 
-#: templates/community/project_detail.html:16
+#: templates/community/project_detail.html:47
 msgid "Project discussions"
 msgstr "项目讨论"
 
-#: community/models.py:16
+#: community/models.py:18
 msgid "Project name"
 msgstr "项目名称"
 
-#: community/views.py:126
+#: templates/community/projects_base.html:6
+msgid "Project navigation"
+msgstr "项目导航"
+
+#: community/views.py:192
 msgid "Project updated."
 msgstr "项目已更新。"
 
-#: templates/base.html:24 templates/base.html:62 templates/community/projects.html:3
+#: templates/base.html:25 templates/base.html:81 templates/community/projects.html:4 templates/community/projects.html:8
 msgid "Projects"
 msgstr "项目"
 
-#: templates/base.html:75
+#: templates/base.html:99
 msgid "Projects live here. Their code lives wherever you build."
 msgstr "在这里分享项目，代码继续托管在你喜欢的平台。"
 
-#: community/views.py:151
+#: community/views.py:228
 msgid "Publish discussion"
 msgstr "发布讨论"
 
-#: community/views.py:116
+#: community/views.py:178
 msgid "Publish project"
 msgstr "发布项目"
 
-#: templates/registration/signup.html:7
+#: templates/registration/signup.html:11
 msgid "Pull up a chair"
 msgstr "来这里坐坐"
 
-#: templates/community/forum.html:6
-msgid "Questions, discoveries, works in progress, and everything in between."
-msgstr "聊问题、谈发现、分享开发中的点滴，也欢迎随便聊聊。"
-
-#: templates/community/project_detail.html:16
+#: templates/community/project_detail.html:48
 msgid "Questions, feedback, and what comes next."
 msgstr "交流问题、分享反馈，一起想想下一步。"
 
@@ -445,132 +427,128 @@ msgstr "交流问题、分享反馈，一起想想下一步。"
 msgid "Read full discussion"
 msgstr "查看完整讨论"
 
-#: templates/community/forum.html:25
+#: templates/community/forum.html:38
 msgid "Recently active"
 msgstr "最近活跃"
 
-#: community/models.py:49
+#: community/models.py:61
 msgid "Related project"
 msgstr "关联项目"
 
-#: templates/partials/vote.html:5
+#: templates/partials/vote.html:6
 msgid "Remove project like"
 msgstr "取消项目点赞"
 
-#: templates/community/topic_detail.html:9
+#: templates/community/topic_detail.html:34
 msgid "Reply"
 msgstr "回复"
 
-#: templates/partials/project_list.html:14
+#: templates/partials/project_list.html:21
 msgid "Room for something new."
 msgstr "这里，期待你的新作品。"
 
-#: community/views.py:130 community/views.py:166
+#: community/views.py:201 community/views.py:251
 msgid "Save changes"
 msgstr "保存修改"
 
-#: templates/community/forum.html:20 templates/community/projects.html:17
+#: templates/base.html:42
 msgid "Search"
 msgstr "搜索"
 
-#: templates/community/forum.html:13
+#: templates/base.html:33
 msgid "Search discussions"
 msgstr "搜索讨论"
 
-#: templates/community/forum.html:14
+#: templates/base.html:34
 msgid "Search discussions…"
 msgstr "搜索讨论…"
 
-#: templates/community/projects.html:12
+#: templates/base.html:29
 msgid "Search projects"
 msgstr "搜索项目"
 
-#: templates/community/projects.html:13
+#: templates/base.html:30
 msgid "Search projects or tools…"
 msgstr "搜索项目或工具…"
 
-#: templates/community/forum.html:28
+#: templates/community/forum.html:28 templates/community/projects.html:25
 #, python-format
 msgid "Search results for “%(query)s”"
 msgstr "“%(query)s”的搜索结果"
 
-#: community/forms.py:27
+#: community/forms.py:43
 msgid "Separate tools with commas."
 msgstr "多个工具请用英文逗号分隔。"
 
-#: templates/base.html:57 templates/community/projects.html:7 templates/partials/project_list.html:14
+#: templates/base.html:76 templates/community/forum.html:21 templates/community/projects.html:12 templates/community/projects.html:18 templates/partials/project_list.html:23
 msgid "Share a project"
 msgstr "分享项目"
 
-#: templates/registration/signup.html:7
+#: templates/registration/signup.html:13
 msgid "Share a project, ask a question, or meet someone building something interesting."
 msgstr "分享项目、提出问题，认识正在做有趣作品的人。"
 
-#: templates/base.html:56
+#: templates/base.html:75
 msgid "Share what you are building with AI, trade ideas, or just start a conversation."
 msgstr "分享你用 AI 做的项目，交流想法，或者随便聊聊。"
 
-#: community/views.py:114
+#: templates/community/projects.html:15
+msgid "Share what you are building…"
+msgstr "分享你正在做的项目…"
+
+#: community/views.py:176
 msgid "Share your project"
 msgstr "分享你的项目"
 
-#: community/models.py:44
+#: community/models.py:48
 msgid "Show & tell"
 msgstr "作品分享"
 
-#: templates/base.html:15
+#: templates/base.html:16
 msgid "Skip to content"
 msgstr "跳转到正文"
 
-#: templates/community/projects.html:6
-msgid "Small ideas. Real projects."
-msgstr "从小想法，到真作品。"
-
-#: templates/community/forum.html:24
+#: templates/community/forum.html:37
 msgid "Sort discussions"
 msgstr "讨论排序"
 
-#: templates/community/projects.html:21
+#: templates/community/projects.html:33
 msgid "Sort projects"
 msgstr "项目排序"
 
-#: templates/community/project_detail.html:10
+#: templates/community/project_detail.html:27
 msgid "Source code"
 msgstr "源代码"
 
-#: community/models.py:22
+#: community/models.py:24
 msgid "Source code URL"
 msgstr "代码仓库链接"
 
-#: community/views.py:149 templates/partials/topic_list.html:13
+#: community/views.py:226 templates/community/forum.html:12 templates/partials/topic_feed.html:41 templates/partials/topic_list.html:25
 msgid "Start a discussion"
 msgstr "发起讨论"
 
-#: templates/community/forum.html:6
-msgid "The common room"
-msgstr "社区客厅"
-
-#: community/models.py:50
+#: community/models.py:63
 msgid "Title"
 msgstr "标题"
 
-#: templates/base.html:63
+#: templates/base.html:82
 msgid "Topics"
 msgstr "话题"
 
-#: templates/partials/topic_list.html:13
+#: templates/partials/topic_feed.html:40 templates/partials/topic_list.html:24
 msgid "Try a different search, or start a conversation of your own."
 msgstr "换个关键词试试，或发起你自己的讨论。"
 
-#: templates/base.html:69
+#: templates/base.html:88
 msgid "View all"
 msgstr "查看全部"
 
-#: templates/community/project_detail.html:10
+#: templates/community/project_detail.html:26
 msgid "Visit project"
 msgstr "体验项目"
 
-#: community/models.py:21
+#: community/models.py:23
 msgid "Website or demo URL"
 msgstr "网站或演示链接"
 
@@ -578,51 +556,55 @@ msgstr "网站或演示链接"
 msgid "Websites"
 msgstr "网站"
 
-#: templates/registration/login.html:7
+#: templates/registration/login.html:12
 msgid "Welcome back."
 msgstr "欢迎回来。"
 
-#: community/views.py:218
+#: community/views.py:319
 msgid "Welcome to Buildroom. Make yourself at home."
 msgstr "欢迎来到 Buildroom，像在家一样自在。"
 
-#: community/forms.py:21
+#: community/forms.py:32
 msgid "What does it help people do?"
 msgstr "这个项目能帮大家做什么？"
 
-#: community/forms.py:20
+#: community/forms.py:29
 msgid "What is your project called?"
 msgstr "你的项目叫什么？"
 
-#: community/forms.py:38
+#: community/forms.py:57
 msgid "What would you like to talk about?"
 msgstr "你想聊点什么？"
+
+#: templates/partials/fields.html:10
+msgid "Write"
+msgstr "编辑"
 
 #: templates/community/forum.html:15
 msgid "Write a post, ask a question…"
 msgstr "发个帖子，聊聊问题…"
 
-#: community/views.py:146
+#: community/views.py:219
 msgid "Your discussion is live."
 msgstr "讨论已发布。"
 
-#: community/models.py:51
+#: community/models.py:64
 msgid "Your post"
 msgstr "正文"
 
-#: community/views.py:111
+#: community/views.py:168
 msgid "Your project is live. Start a discussion to tell its story."
 msgstr "项目已发布。发起讨论，聊聊它背后的故事吧。"
 
-#: community/models.py:70
+#: community/models.py:89
 msgid "Your reply"
 msgstr "回复内容"
 
-#: templates/registration/login.html:7
+#: templates/registration/login.html:11
 msgid "Your seat is still here"
 msgstr "老位置，等你回来"
 
-#: templates/partials/project_list.html:9
+#: templates/partials/project_list.html:10
 #, python-format
 msgid "by %(username)s"
 msgstr "作者：%(username)s"

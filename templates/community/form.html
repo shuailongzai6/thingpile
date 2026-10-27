@@ -1,8 +1,26 @@
 {% extends 'base.html' %}
 {% load i18n %}
+
 {% block title %}{{ title }} · Buildroom{% endblock %}
 {% block shell_class %}page-shell-single{% endblock %}
 {% block sidebar %}{% endblock %}
+
 {% block content %}
-  <div class="form-card"><a class="back-link" href="{{ back_url }}"><span aria-hidden="true">←</span> {% translate 'Go back' %}</a><section class="surface-panel"><header class="form-heading"><h1 class="page-title">{{ title }}</h1>{% if subtitle %}<p class="page-description">{{ subtitle }}</p>{% endif %}</header><form class="content-form" method="post">{% csrf_token %}{% include 'partials/fields.html' %}<div class="form-actions"><a class="button button-quiet" href="{{ back_url }}">{% translate 'Cancel' %}</a><button class="button button-primary" type="submit">{{ submit_label }}<span aria-hidden="true">↗</span></button></div></form></section></div>
+  <div class="form-card">
+    <a class="back-link" href="{{ back_url }}"><span aria-hidden="true">←</span> {% translate 'Go back' %}</a>
+    <section class="panel">
+      <header class="form-heading">
+        <h1 class="page-title">{{ title }}</h1>
+        {% if subtitle %}<p class="page-description">{{ subtitle }}</p>{% endif %}
+      </header>
+      <form method="post">
+        {% csrf_token %}
+        {% include 'partials/fields.html' %}
+        <div class="form-actions">
+          <a class="button button-quiet" href="{{ back_url }}">{% translate 'Cancel' %}</a>
+          <button class="button button-primary" type="submit">{{ submit_label }}<span aria-hidden="true">↗</span></button>
+        </div>
+      </form>
+    </section>
+  </div>
 {% endblock %}

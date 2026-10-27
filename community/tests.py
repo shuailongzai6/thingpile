@@ -217,8 +217,13 @@ class CommunityWorkflowTests(TestCase):
         )
         self.assertIn("<strong>Hello</strong>", html)
         self.assertIn('class="language-python"', html)
+        self.assertIn('<span class="nb">print</span>', html)
         self.assertNotIn("<script>", html)
         self.assertNotIn('href="javascript:', html)
+        response = self.client.post(
+            reverse("markdown_preview", args=["body"]), {"body": "**Hi**"}
+        )
+        self.assertContains(response, "<strong>Hi</strong>")
 
     def test_language_switch_is_persistent_and_does_not_translate_user_content(self):
         response = self.client.post(
