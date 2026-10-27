@@ -1,0 +1,9 @@
+{% load i18n %}
+{% if user.is_authenticated %}
+  <form class="vote-control" method="post" action="{% url 'project_vote' project.pk %}" hx-post="{% url 'project_vote' project.pk %}" hx-target="this" hx-swap="outerHTML">
+    {% csrf_token %}<input type="hidden" name="next" value="{{ request.POST.next|default:request.get_full_path }}">
+    <button class="vote-button{% if project.has_voted %} is-selected{% endif %}" type="submit" aria-pressed="{{ project.has_voted|yesno:'true,false' }}" aria-label="{% if project.has_voted %}{% translate 'Remove project like' %}{% else %}{% translate 'Like project' %}{% endif %}"><svg class="icon icon-small" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 12 5-5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="vote-count">{{ project.vote_count|default:0 }}</span></button>
+  </form>
+{% else %}
+  <a class="vote-button" href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}" aria-label="{% translate 'Log in to like this project' %}"><svg class="icon icon-small" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 12 5-5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="vote-count">{{ project.vote_count|default:0 }}</span></a>
+{% endif %}

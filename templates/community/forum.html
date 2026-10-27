@@ -1,0 +1,59 @@
+{% extends 'community/forum_base.html' %}
+{% load i18n humanize community_tags %}
+
+{% block title %}{% translate 'Forum' %} · Buildroom{% endblock %}
+
+{% block content %}
+  <div class="forum-heading">
+    <h1 class="forum-heading-title">{% translate 'Forum' %}</h1>
+    <span class="forum-heading-count">{% blocktranslate count count=page_obj.paginator.count %}{{ count }} topic{% plural %}{{ count }} topics{% endblocktranslate %}</span>
+  </div>
+
+  <section class="forum-composer" aria-label="{% translate 'Start a discussion' %}">
+    <a class="composer-prompt" href="{% url 'topic_create' %}{% if selected_project %}?project={{ selected_project.pk }}{% endif %}">
+      <span class="author-avatar" aria-hidden="true">{% if user.is_authenticated %}{{ user.get_full_name|default:user.username|first|upper }}{% else %}+{% endif %}</span>
+      <span class="composer-copy">{% translate 'Write a post, ask a question…' %}</span>
+    </a>
+    <div class="composer-actions">
+      <a class="button button-primary button-small" href="{% url 'topic_create' %}{% if selected_project %}?project={{ selected_project.pk }}{% endif %}">
+        <span aria-hidden="true">+</span>{% translate 'New topic' %}
+      </a>
+      <a class="button button-quiet button-small" href="{% url 'project_create' %}">{% translate 'Share a project' %}<span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  {% if q or category or selected_project %}
+    <div class="filter-notice">
+      <div class="feed-filter-summary">
+        {% if q %}<span>{% blocktranslate with query=q %}Search results for “{{ query }}”{% endblocktranslate %}</span>{% endif %}
+        {% if category %}{% for item in categories %}{% if item.value == category %}<span class="badge badge-category">{{ item.label }}</span>{% endif %}{% endfor %}{% endif %}
+        {% if selected_project %}<span>{% blocktranslate with name=selected_project.name %}Discussions about {{ name }}{% endblocktranslate %}</span>{% endif %}
+      </div>
+      <a href="{% url 'forum' %}">{% translate 'Clear filter' %}<span aria-hidden="true"> ×</span></a>
+    </div>
+  {% endif %}
+
+  <div class="feed-toolbar">
+    <nav class="tab-list" aria-label="{% translate 'Sort discussions' %}">
+      <a class="tab-link{% if sort == 'active' or not sort %} is-active{% endif %}" href="{% querystring sort='active' page=None %}"{% if sort == 'active' or not sort %} aria-current="page"{% endif %}>{% translate 'Recently active' %}</a>
+      <a class="tab-link{% if sort == 'latest' %} is-active{% endif %}" href="{% querystring sort='latest' page=None %}"{% if sort == 'latest' %} aria-current="page"{% endif %}>{% translate 'Latest' %}</a>
+      <a class="tab-link{% if sort == 'top' %} is-active{% endif %}" href="{% querystring sort='top' page=None %}"{% if sort == 'top' %} aria-current="page"{% endif %}>{% translate 'Most liked' %}</a>
+    </nav>
+    <form class="feed-filter-form" action="{% url 'forum' %}" method="get">
+      <input type="hidden" name="q" value="{{ q }}">
+      <input type="hidden" name="category" value="{{ category }}">
+      <input type="hidden" name="sort" value="{{ sort|default:'active' }}">
+      <label class="visually-hidden" for="topic-project">{% translate 'Project' %}</label>
+      <select class="filter-select feed-project-filter" id="topic-project" name="project">
+        <option value="">{% translate 'All projects' %}</option>
+        {% for item in project_options %}
+          <option value="{{ item.pk }}"{% if selected_project.pk == item.pk %} selected{% endif %}>{{ item.name }}</option>
+        {% endfor %}
+      </select>
+      <button class="button button-quiet button-small" type="submit">{% translate 'Apply' %}</button>
+    </form>
+  </div>
+
+  {% include 'partials/topic_feed.html' with topics=page_obj %}
+  {% include 'partials/pagination.html' %}
+{% endblock %}

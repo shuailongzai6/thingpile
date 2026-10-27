@@ -1,0 +1,16 @@
+{% load i18n humanize community_tags %}
+<div class="project-list">
+  {% for project in projects %}
+    <article class="project-row">
+      <a class="project-icon" href="{% url 'project_detail' project.pk %}" aria-hidden="true" tabindex="-1">{{ project.name|first|upper }}</a>
+      <div class="project-row-main">
+        <h2 class="project-name"><a href="{% url 'project_detail' project.pk %}">{{ project.name }}</a></h2>
+        <p class="project-tagline">{{ project.tagline }}</p>
+        <div class="project-meta"><span>{% blocktranslate with username=project.owner.get_full_name|default:project.owner.username %}by {{ username }}{% endblocktranslate %}</span><span class="badge badge-category">{{ project.get_category_display }}</span>{% for tool in project.tool_list|slice:':2' %}<span class="tool-tag">{{ tool }}</span>{% endfor %}<a class="project-discussion-count" href="{% url 'project_detail' project.pk %}#discussions">{% blocktranslate count count=project.discussion_count %}{{ count }} discussion{% plural %}{{ count }} discussions{% endblocktranslate %}</a></div>
+      </div>
+      {% include 'partials/vote.html' %}
+    </article>
+  {% empty %}
+    <div class="empty-state"><span class="empty-state-icon" aria-hidden="true">+</span><h2>{% translate 'Room for something new.' %}</h2><p>{% translate 'No projects match this search. Try another search or share what you are building.' %}</p><a class="button button-secondary" href="{% url 'project_create' %}">{% translate 'Share a project' %}</a></div>
+  {% endfor %}
+</div>

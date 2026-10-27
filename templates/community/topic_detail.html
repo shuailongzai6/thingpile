@@ -1,0 +1,67 @@
+{% extends 'community/forum_base.html' %}
+{% load i18n humanize community_tags %}
+
+{% block title %}{{ topic.title }} · Buildroom{% endblock %}
+
+{% block content %}
+  <a class="back-link" href="{% url 'forum' %}"><span aria-hidden="true">←</span> {% translate 'Back to forum' %}</a>
+  <article class="surface-panel topic-detail reader-topic">
+    <header class="topic-detail-header reader-header">
+      <div class="topic-detail-labels">
+        <a class="badge badge-category" href="{% url 'forum' %}?category={{ topic.category }}">{{ topic.get_category_display }}</a>
+        {% if topic.project %}
+          <a class="badge badge-project" href="{% url 'project_detail' topic.project.pk %}"><span aria-hidden="true">↗</span> {{ topic.project.name }}</a>
+        {% endif %}
+      </div>
+      <h1 class="detail-title">{{ topic.title }}</h1>
+      <div class="topic-meta reader-byline">
+        <span class="author-avatar avatar-small" aria-hidden="true">{{ topic.author.get_full_name|default:topic.author.username|first|upper }}</span>
+        <strong>{{ topic.author.get_full_name|default:topic.author.username }}</strong>
+        <span class="meta-separator" aria-hidden="true">·</span>
+        <time datetime="{{ topic.created_at|date:'c' }}">{{ topic.created_at|date:'DATETIME_FORMAT' }}</time>
+      </div>
+    </header>
+    <div class="topic-body markdown-content reader-body">{{ topic.body|markdown }}</div>
+    {% if topic.project %}
+      <a class="feed-project reader-project" href="{% url 'project_detail' topic.project.pk %}">
+        <span class="feed-project-icon" aria-hidden="true">{{ topic.project.name|first|upper }}</span>
+        <span class="feed-project-copy"><strong>{{ topic.project.name }}</strong><span>{{ topic.project.tagline }}</span></span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    {% endif %}
+    <div class="topic-actions reader-actions">
+      {% include 'partials/like.html' %}
+      <a class="button button-quiet button-small" href="#reply-form">{% translate 'Reply' %}<span>{{ topic.reply_count|default:0 }}</span></a>
+      {% if user == topic.author %}
+        <a class="button button-quiet button-small edit-topic" href="{% url 'topic_edit' topic.pk %}">{% translate 'Edit topic' %}</a>
+      {% endif %}
+    </div>
+  </article>
+
+  <section class="surface-panel discussion-section reader-conversation" id="replies">
+    <div class="section-heading discussion-heading">
+      <h2 class="section-title">{% translate 'Conversation' %}<span class="count-badge">{{ replies|length }}</span></h2>
+    </div>
+    {% include 'partials/replies.html' %}
+    <div class="reply-form" id="reply-form">
+      {% if user.is_authenticated %}
+        <h2 class="section-title">{% translate 'Add your reply' %}</h2>
+        <form method="post" action="{% url 'reply_create' topic.pk %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ topic.get_absolute_url }}">
+          {% include 'partials/fields.html' with form=reply_form %}
+          <div class="form-actions">
+            <span class="field-help">{% translate 'Be thoughtful. Be helpful. Be yourself.' %}</span>
+            <button class="button button-primary" type="submit">{% translate 'Post reply' %}<span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+      {% else %}
+        <div class="reply-login">
+          <h2 class="section-title">{% translate 'Have something to add?' %}</h2>
+          <p>{% translate 'Log in to join the conversation.' %}</p>
+          <a class="button button-primary" href="{% url 'login' %}?next={{ topic.get_absolute_url|urlencode }}">{% translate 'Log in to reply' %}</a>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

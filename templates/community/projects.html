@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n humanize community_tags %}
+{% block title %}{% translate 'Projects' %} · Buildroom{% endblock %}
+{% block content %}
+  <div class="page-heading">
+    <div><p class="page-eyebrow">{% translate 'Made with a little help from AI' %}</p><h1 class="page-title">{% translate 'Small ideas. Real projects.' %}</h1><p class="page-description">{% translate 'Discover what people are making, try it out, and talk to the builders.' %}</p></div>
+    <a class="button button-primary" href="{% url 'project_create' %}"><span aria-hidden="true">+</span>{% translate 'Share a project' %}</a>
+  </div>
+  <section class="surface-panel">
+    <div class="filter-bar">
+      <form class="search-form" action="{% url 'projects' %}" method="get" role="search">
+        <label class="visually-hidden" for="project-search">{% translate 'Search projects' %}</label>
+        <input class="search-input" id="project-search" type="search" name="q" value="{{ q }}" placeholder="{% translate 'Search projects or tools…' %}">
+        <label class="visually-hidden" for="project-category">{% translate 'Category' %}</label>
+        <select class="filter-select" id="project-category" name="category"><option value="">{% translate 'All categories' %}</option>{% for item in categories %}<option value="{{ item.value }}"{% if category == item.value %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select>
+        <input type="hidden" name="sort" value="{{ sort|default:'latest' }}">
+        <button class="button button-secondary button-small search-submit" type="submit">{% translate 'Search' %}</button>
+      </form>
+    </div>
+    <div class="list-toolbar">
+      <nav class="tab-list" aria-label="{% translate 'Sort projects' %}"><a class="tab-link{% if sort == 'latest' or not sort %} is-active{% endif %}" href="{% querystring sort='latest' page=None %}">{% translate 'Latest' %}</a><a class="tab-link{% if sort == 'top' %} is-active{% endif %}" href="{% querystring sort='top' page=None %}">{% translate 'Most liked' %}</a></nav>
+      <span class="list-count">{% blocktranslate count count=page_obj.paginator.count %}{{ count }} project{% plural %}{{ count }} projects{% endblocktranslate %}</span>
+    </div>
+    {% include 'partials/project_list.html' with projects=page_obj %}
+    {% include 'partials/pagination.html' %}
+  </section>
+{% endblock %}

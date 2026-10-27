@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Create an account' %} · Buildroom{% endblock %}
+{% block shell_class %}page-shell-single{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block content %}
+  <section class="auth-card surface-panel"><header class="form-heading"><p class="page-eyebrow">{% translate 'Pull up a chair' %}</p><h1 class="page-title">{% translate 'Make yourself at home.' %}</h1><p class="page-description">{% translate 'Share a project, ask a question, or meet someone building something interesting.' %}</p></header><form class="content-form" method="post" action="{% url 'signup' %}">{% csrf_token %}<input type="hidden" name="next" value="{{ next }}">{% include 'partials/fields.html' %}<div class="form-actions"><button class="button button-primary button-full" type="submit">{% translate 'Create account' %}<span aria-hidden="true">↗</span></button></div></form><p class="auth-alternative">{% translate 'Already part of the community?' %} <a href="{% url 'login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">{% translate 'Log in' %}</a></p></section>
+{% endblock %}
